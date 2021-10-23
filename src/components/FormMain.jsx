@@ -26,21 +26,27 @@ const FormMain = () => {
     };
     return (
         <div className="container">
-            <h1 className="text-center">{`Form name : ${getFormDetail ? getFormDetail.formName : ""}`}</h1>
-            <hr />
-            <div className="performSurvey">
-                <form onSubmit={(e) => handleSubmit(e)} >
-                    {
-                        !getFormDetail ? "No Questions Found" :
-                            getFormDetail.allFormData.map((el, id) => {
-                                return <div key={id}>
-                                    <h4>Q.{id + 1}) {el.title}</h4> <div className="alignCenter"><FormFields fieldChanged={fieldChanged} el={el} /></div> <br />
-                                </div>
-                            })
-                    }
-                    <button type="submit" className="btn btn-success" >Submit</button>
-                </form>
-            </div>
+            {
+                !getFormDetail ? <p className="text-center">No Questions Found</p> :
+                    <div>
+                        <h1 className="text-center">{`Form name : ${getFormDetail.formName}`}</h1>
+                        <hr />
+                        <div className="performSurvey">
+                            <form onSubmit={(e) => handleSubmit(e)} >
+                                {
+
+                                    getFormDetail.allFormData.map((el, id) => {
+                                        return <div key={id}>
+                                            <h4>Q.{id + 1}) {el.title}</h4> <div className="alignCenter"><FormFields fieldChanged={fieldChanged} el={el} /></div> <br />
+                                        </div>
+                                    })
+                                }
+                                <button type="submit" className="btn btn-success" >Submit</button>
+                            </form>
+                        </div>
+
+                    </div>
+            }
         </div>
     )
 }
